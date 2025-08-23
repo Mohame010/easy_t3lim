@@ -1,4 +1,12 @@
+import 'dart:io';
+
 import 'package:desktop_app/Feature/Auth/SignIn/view/screen/login_screen.dart';
+import 'package:desktop_app/Feature/Home/view/widget/show_privacy_dialog.dart';
+import 'package:desktop_app/Feature/Home/view/widget/show_privacy_mac_os_and_linux.dart';
+import 'package:desktop_app/core/function/check_user.dart';
+import 'package:desktop_app/core/function/is_running_as_admin.dart';
+import 'package:desktop_app/core/function/relaunch_as_admin.dart';
+import 'package:desktop_app/core/service/screen_record_blocker.dart';
 import 'package:desktop_app/main.dart';
 import 'package:flutter/material.dart';
 
@@ -14,31 +22,34 @@ class _OverlayWrapperState extends State<OverlayWrapper> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final context = navigatorKey.currentState?.context;
-     
-      // if (context != null) {
-      //  await checkUser(context);
-      //   final isAdmin = await isRunningAsAdmin();
-      //   if (!isAdmin) {
-      //     bool userAgreed = false;
-      //     if (Platform.isWindows) {
-      //       userAgreed = await showPrivacyDialogWindows();
-      //     } else if (Platform.isMacOS || Platform.isLinux) {
-      //       userAgreed = await showPrivacyDialogMacOsAndLinux();
-      //     }
+      if (context != null) {
+        await checkUser(context);
+        final isAdmin = await isRunningAsAdmin();
+      if (!isAdmin) {
+  bool userAgreed = false;
+  if (Platform.isWindows) {
+    userAgreed = await showPrivacyDialogWindows();
+  } else if (Platform.isMacOS || Platform.isLinux) {
+    userAgreed = await showPrivacyDialogMacOsAndLinux();
+  }
 
-      //     if (!userAgreed) {
-      //       relaunchAsAdmin();
-            
-      //     }
-          
-      //   } else {
-      //     // إذا كان المستخدم لديه صلاحيات المسؤول، نعرض الشاشة الرئيسية
-      //     ScreenRecorderBlocker.startMonitoring(context);
-      //   }
-      // }
+  if (userAgreed) {
+    // ✅ هنا بس لو وافق، نعيد التشغيل كـ Admin
+    relaunchAsAdmin();
+  } else {
+    // ❌ المستخدم رفض → نقفل التطبيق أو نرجع
+    Future.delayed(Duration(milliseconds: 200), () {
+      exit(0);
     });
+  }
+  } else {
+    // هو أصلًا Admin
+    await showCloseAppsDialog();
+    ScreenRecorderBlocker.startMonitoring(context);
+  }}});
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return LoginScreen();

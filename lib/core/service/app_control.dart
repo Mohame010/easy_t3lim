@@ -7,5 +7,5 @@ class AppControl {
   static Future<void> exitApp() async => _channel.invokeMethod('exitApp');
   static Future<void> lockMode() async => _channel.invokeMethod('lockMode');
   static Future<void> unlockMode() async => _channel.invokeMethod('unlockMode');
-  static Future<void> closeAllApps() async => _channel.invokeMethod('closeAllApps');
+  static Future<void> closeOtherApps() async => _channel.invokeMethod('closeOtherApps');
 }
