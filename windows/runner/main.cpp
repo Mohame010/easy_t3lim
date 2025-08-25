@@ -8,34 +8,13 @@
 #include <string>
 #include <memory>
 
-void EnsureRunAsAdmin() {
-    BOOL isAdmin = FALSE;
-    PSID adminGroup;
-    SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
-    if (AllocateAndInitializeSid(&NtAuthority, 2,
-        SECURITY_BUILTIN_DOMAIN_RID,
-        DOMAIN_ALIAS_RID_ADMINS,
-        0, 0, 0, 0, 0, 0,
-        &adminGroup)) {
-        CheckTokenMembership(NULL, adminGroup, &isAdmin);
-        FreeSid(adminGroup);
-    }
+#ifndef WDA_EXCLUDEFROMCAPTURE
+#define WDA_EXCLUDEFROMCAPTURE 0x00000011
+#endif
 
-    if (!isAdmin) {
-        wchar_t exePath[MAX_PATH];
-        GetModuleFileName(NULL, exePath, MAX_PATH);
 
-        SHELLEXECUTEINFO sei = { sizeof(sei) };
-        sei.lpVerb = L"runas";
-        sei.lpFile = exePath;
-        sei.hwnd = NULL;
-        sei.nShow = SW_NORMAL;
-
-        if (!ShellExecuteEx(&sei)) {
-            ExitProcess(0);
-        }
-        ExitProcess(0);
-    }
+bool isRemoteSession() {
+  return GetSystemMetrics(SM_REMOTESESSION) != 0;
 }
 
 int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
@@ -56,6 +35,25 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   if (!window.Create(L"desktop_app", origin, size)) {
     return EXIT_FAILURE;
   }
+
+
+  HWND hwnd = window.GetHandle();
+
+  // ✅ منع تسجيل الشاشة
+  if (!SetWindowDisplayAffinity(hwnd, WDA_EXCLUDEFROMCAPTURE)) {
+    // fallback للأنظمة الأقدم
+    SetWindowDisplayAffinity(hwnd, WDA_MONITOR);
+  }
+
+  // ✅ لو في جلسة Remote
+  if (isRemoteSession()) {
+    MessageBox(hwnd,
+               L"التطبيق لا يعمل أثناء جلسة Remote Desktop أو مشاركة شاشة.\nمن فضلك افتح التطبيق محلياً.",
+               L"تحذير أمني",
+               MB_ICONWARNING | MB_OK);
+    return EXIT_FAILURE; // اقفل التطبيق
+  }
+
   window.SetQuitOnClose(true);
 
   ::MSG msg;

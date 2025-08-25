@@ -89,18 +89,6 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                 icon: Icon(checkIconPassword()),
               ),
             ),
-            AlignLeftText(text: 'Deviceid ID'),
-            CustomTextFormField(
-              controller: signUpCubit.deviceidIDController,
-              // readOnly: true,
-              prefixIcon: Icons.perm_device_information,
-            ),
-            AlignLeftText(text: 'UDID'),
-            CustomTextFormField(
-              controller: signUpCubit.udIDController,
-              // readOnly: true,
-              prefixIcon: Icons.vpn_key,
-            ),
             verticalSpace(20),
             SignUpButtonState(),
             verticalSpace(20),
