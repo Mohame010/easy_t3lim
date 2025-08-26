@@ -1,3 +1,4 @@
+import 'package:desktop_app/Feature/Auth/SignIn/logic/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/function/show_snak_bar.dart';
@@ -15,25 +16,30 @@ class LoginButtonStateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LogInState>(
+    return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
-        if (state is LogInSuccessState) {
-          pushReplacement(context, WebViewPage());
-        } else if (state is LogInFailureState) {
-          showSnakBar(context, state.erroreMessag);
-        }
+        state.maybeWhen(
+          orElse: () {},
+          success: () {
+            pushReplacement(context, HomeScreen());
+          },
+          error: (error) {
+            showSnakBarError(context, error);
+          },
+        );
       },
       builder: (context, state) {
         return CustomButton(
           onPressed: () {
-            logInCubit.emitLogInState();
+            logInCubit.emitLoginStates();
           },
-          title: state is LogInLoadingState
-              ? CustomLoadingIndicator()
-              : Text(
-                  'Log In',
-                  style: AppTextStyle.fontWeightw400Size18ColorWhite(),
-                ),
+          title: state.maybeWhen(
+            orElse: () => Text(
+              'Log In',
+              style: AppTextStyle.fontWeightw400Size18ColorWhite(),
+            ),
+            loading: () => CustomLoadingIndicator(),
+          ),
         );
       },
     );

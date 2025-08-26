@@ -1,0 +1,177 @@
+{
+  "common": {
+      "show_all": "Show all",
+      "loading": "Loading..",
+      "by_click_on_Sign_Up_you_agree_on_our": "by click on Sign Up you agree on our",
+      "and_the":"and the",
+      "terms_and_conditions": "terms and conditions",
+      "terms_of_use": "terms of use",
+      "privacy_policy": "privacy policy",
+      "contact_us": "Contact us",
+      "accept_param_first": "Please read and accept {} first",
+      "page_not_found": "The page is not found",
+      "no_items": "No items",
+      "all": "All",
+      "any": "Any",
+
+    "message": {
+          "no_internet": "No internet",
+          "check_internet": "Please check the internet connection",
+          "sent_successfully": "Sent successfully",
+          "copied": "Copied",
+          "number_copied": "The number has been copied",
+          "congrats": "Congratulations",
+          "done_successfully": "Done Successfully",
+          "press_back_again_to_exit": "Press back again to exit",
+          "hello_user_param": "Hello, {}",
+          "all_rights_reserved": "All rights reserved to Niqat Co."
+        },
+
+    "errors": {
+        "error_occurred": "Error occurred",
+        "unexpected_error_occurred": "Unexpected error occurred",
+        "connection_timeout_error": "Connection to the server timed out",
+        "send_timeout_error": "Send request to the server timed out",
+        "receive_timeout_error": "Receive request from the server timed out",
+        "error_request_canceled": "Request to the server was canceled",
+        "bad_certificate_error": "\"Bad Certificate\" Error",
+        "connection_to_server_failed": "Connection to the server failed",
+        "connection_failed_check_internet": "please check the internet connection and then try.",
+        "failed_to_load_data": "Fail to load data",
+        "failed_to_load_data_try_again": "@:errors.failed_to_load_data, please try again",
+        "phone_number_or_password_wrong":"Phone Number Or Password Wrong",
+        "verification_token_invalid_error":"User does not exist. Create an account first.",
+        "verification_token_expired_error": "The verification token has expired. Please request a new verification code."
+      },
+
+    "navigation": {
+        "home_screen": "Home",
+        "my_props": "My props",
+        "marketing": "Marketing",
+        "settings": "Settings",
+        "back_home": "Back to Home"
+      },
+
+    "validation": {
+        "this_field_required": "This field is required",
+        "optional": "Optional"
+      },
+
+    "title": {
+        "hello": "Hello"
+      }
+
+  },
+
+  
+  "auth": {
+    "label": {
+      "login": "Login",
+      "logout": "Logout",
+      "guest": "a guest",
+      "sign_up": "Sign Up",
+      "delete_account": "Delete the account",
+      "or_skip_as_guest": "Or skip as a guest",
+     
+      "first_name": "First name",
+      "last_name": "Last name",
+      "email": "E-mail",
+      "password": "Password",
+      "confirm_password": "Confirm the password",
+      
+      "new_password": "New password",
+      "address": "Address",
+      "birth_date": "Birth date",
+      "referral_code": "Referral code"
+    },
+    "title": {
+      "welcome_back": "Welcome back",
+      "signup_hint": "Sign up to your account.",
+      "login_hint": "Login to your account."
+    },
+    "placeholder": {
+      "type_your_name": "Enter your name",
+      "enter_your_email": "Enter your email",
+      "enter_phone_number_instruction": "Enter phone number",
+      "type_new_password": "Type the new password",
+      "referral_code_hint": "Example of a referral code: Aq12345"
+    },
+    "hint_texts": {
+      "type_your_phone_number": "0000000",
+      "enter_phone_number_instruction": "Enter phone number"
+    },
+    "message": {
+      "want_logout": "Do you want to log out?",
+      "not_logged_in": "You did not log in",
+      "login_again": "Please login again",
+      "login_first_to_continue": "Log in to continue",
+      "login_to_get_more_features_and_more": "Log in to continue your journey with Aqaryoun",
+      "registered_successfully": "The registration has been successful",
+      "you_can_login_now": "You can now log in",
+      "reset_password_successfully": "Password has changed successfully",
+      "you_can_login_with_new_password": "You can now login with the new password",
+      "enter_email_to_reset_password": "Enter your email to reset the password",
+      "enter_forget_password_code": "Enter the code sent to your email"
+    },
+    "prompt": {
+      "already_have_account": "Have an account ?",
+      "not_have_account": "Do not have an account?",
+      "forgot_password": "Forgot password?",
+      "i_agree_to": "I agree to"
+    },
+    "validation": {
+      "invalid_email": "Email is not valid!",
+      "passwords_not_match": "Passwords are not identical",
+      "password_is_short": "The password is very short",
+      "invalid_phone_number": "The phone number is not valid",
+      "password_short_length_param": "The password must be at least {} characters.",
+      "please_complete_sign_up_fields": "Please complete the registration fields",
+      "invalid_credentials": "Email or password is invalid",
+      "please_select_birth_date": "Please select your birth date",
+      "please_select_gender": "Please select your gender",
+      "invalid_name": "Invalid name, please type the name correctly"
+    },
+    "action": {
+      "login_now": "Login now",
+      "sign_in_to_account": "Log in to the account",
+      "reset_password": "Reset password"
+    },
+    "otp": {
+      "select_otp_method":"Select Otp Method",
+      "email":"Email",
+      "label":"Verification code",
+      "enter_verification_code": "Enter the verification code",
+      "we_have_sent_code_to_phone_number": "Success! \n We've sent a password recovery message to your WhatsApp \n number:.Please check your WhatsApp messages. It might take a few moments.",
+      "we_have_sent_code_to_email": "Success! \n We've sent a password recovery message to your email.Please check your inbox or Spam folder.",
+      "did_not_receive_code": "Didn't receive code ?",
+      "code": "Code",
+      "otp_code_resent_check": "OTP code has been re-sent, please check",
+      "wrong_otp": "You have entered an incorrect OTP code. Re-enter the code or request a new OTP code",
+      "sending_code": "The code is being sent",
+      "code_resent": "The code has been re-sent",
+      "resend_again": "Resend",
+      "resend_again_after": "Resend again after",
+      "verify": "Verify",
+      "registered_successfully_dialog_title":"Congratulations",
+       "registered_successfully_dialog_body":"You have registered Successfully",
+       "navigate_to_complete_profile_button":"Complete your profile"
+    },
+    "delete_account_flow": {
+      "want_delete_account": "Sure you want to delete your account?\nYou cannot undo this action.",
+      "accept_terms_to_delete_account": "Please accept the conditions for deleting the account"
+    },
+    "forget_password":{
+      "title":"Forget Password?",
+      "label_email":"Enter your email address to receive a password recovery message. Note: The message might be delivered to your Spam or Junk folder, so please check there if you don’t see it in your inbox.",
+      "label_phone":"Enter your phone number to receive a password recovery message on WhatsApp.",
+      "recover_password":"Recover Password",
+      "remember_your_password": "Remember Your Password ?"
+    }
+  },
+  "core":{
+    "password":"Password",
+    "email":"Email",
+    "signup":"Sign Up",
+    "sign_in": "Sign in"
+  }
+}

@@ -1,20 +1,20 @@
-part of 'sign_up_cubit.dart';
+// part of 'sign_up_cubit.dart';
 
-@immutable
-abstract class SignUpState {}
+// @immutable
+// abstract class SignUpState {}
 
-class SignUpInitialState extends SignUpState {}
+// class SignUpInitialState extends SignUpState {}
 
-class SignUpSuccessState extends SignUpState {
-  final SignUpResponseModel signUpResponseModel;
+// class SignUpSuccessState extends SignUpState {
+//   final SignUpResponseModel signUpResponseModel;
 
-  SignUpSuccessState({required this.signUpResponseModel});
-}
+//   SignUpSuccessState({required this.signUpResponseModel});
+// }
 
-class SignUpFailureState extends SignUpState {
-  final String erroreMessag;
+// class SignUpFailureState extends SignUpState {
+//   final String erroreMessag;
 
-  SignUpFailureState({required this.erroreMessag});
-}
+//   SignUpFailureState({required this.erroreMessag});
+// }
 
-class SignUpLoadingState extends SignUpState {}
+// class SignUpLoadingState extends SignUpState {}

@@ -1,0 +1,176 @@
+{
+
+  "common": {
+    "show_all": "عرض الكل",
+    "loading": "جارٍ التحميل..",
+    "by_click_on_Sign_Up_you_agree_on_our": "بالنقر على تسجيل فإنك توافق على",
+      "and_the":"و",
+    "terms_and_conditions": "الشروط والأحكام",
+    "terms_of_use": "شروط الاستخدام",
+    "privacy_policy": "سياسة الخصوصية",
+    "contact_us": "تواصل معنا",
+    "accept_param_first": "يرجى قراءة وقبول {} أولاً",
+    "page_not_found": "الصفحة غير موجودة",
+    "no_items": "لا يوجد عناصر",
+    "all": "الكل",
+    "any": "أي",
+    "message": {
+      "no_internet": "لا يوجد اتصال بالإنترنت",
+      "check_internet": "يرجى التحقق من اتصال الانترنت",
+      "sent_successfully": "تم الإرسال بنجاح",
+      "copied": "تم النسخ",
+      "number_copied": "تم نسخ الرقم",
+      "congrats": "تهانينا",
+      "done_successfully": "تم بنجاح",
+      "press_back_again_to_exit": "رجوع مرة أخرى للخروج",
+      "hello_user_param": "أهلا بك {}",
+      "all_rights_reserved": "جميع الحقوق محفوظة لشركة نقاط"
+    },
+    "errors": {
+      "error_occurred": "حدث خطأ",
+      "unexpected_error_occurred": "حدث خطأ غير متوقع",
+      "connection_timeout_error": "انتهت مهلة الاتصال بالخادم",
+      "send_timeout_error": "انتهت مهلة الإرسال للخادم",
+      "receive_timeout_error": "انتهت مهلة الاستقبال من الخادم",
+      "error_request_canceled": "تم إلغاء الطلب إلى الخادم",
+      "bad_certificate_error": "خطأ \"شهادة غير صالحة\"",
+      "connection_to_server_failed": "فشل الاتصال بالخادم",
+      "connection_failed_check_internet": "يرجى التحقق من الاتصال بالإنترنت ثم إعادة المحاولة.",
+      "failed_to_load_data": "فشل تحميل البيانات",
+      "failed_to_load_data_try_again": "@:errors.failed_to_load_data، يرجى المحاولة مرة أخرى",
+      "phone_number_or_password_wrong":"رقم الهاتف أو كلمة السر خطأ"    ,
+      "verification_token_invalid_error":"المستخدم غير موجود أنشئ حساب أولا",
+      "verification_token_expired_error":"رمز التحقق منتهي الصلاحية. برجاء طلب رمز جديد"
+
+    },
+    "navigation": {
+      "home_screen": "الرئيسية",
+      "my_props": "عقاراتي",
+      "marketing": "التسويق",
+      "settings": "الإعدادات",
+      "back_home": "الرجوع للرئيسية"
+    },
+    "validation": {
+      "this_field_required": "هذا الحقل مطلوب",
+      "optional": "اختياري"
+    },
+    "title": {
+      "hello": "مرحبا"
+    }
+  },
+
+  "auth": {
+    "label": {
+      "login": "تسجيل الدخول",
+      "logout": "تسجيل الخروج",
+      "guest": "ضيف",
+      "sign_up": "إنشاء حساب",
+      "delete_account": "حذف الحساب",
+      "or_skip_as_guest": "أو متابعة كضيف",
+     
+      "first_name": "الاسم الأول",
+      "last_name": "الاسم الأخير",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة السر",
+      "confirm_password": "تأكيد كلمة السر",
+      "new_password": "كلمة السر الجديدة",
+      "address": "العنوان",
+      "birth_date": "تاريخ الميلاد",
+      "referral_code": "رمز الإحالة"
+    },
+    "title": {
+      "welcome_back": "مرحبًا بعودتك",
+      "signup_hint": "قم بالتسجيل في حسابك.",
+      "login_hint": "تسجيل الدخول إلى حسابك."
+
+    },
+    "placeholder": {
+      "type_your_name": "اكتب اسمك",
+      "enter_your_email": "إكتب الإميل",
+      "enter_phone_number_instruction": "أدخل رقم الهاتف",
+      "type_new_password": "اكتب كلمة السر الجديدة",
+      "referral_code_hint": "مثال على رمز الإحالة: Aq12345"
+    },
+    "hint_texts": {
+      "type_your_phone_number": "0000000",
+      "enter_phone_number_instruction": "إكتب رقم تلفونك"
+    },
+
+    "message": {
+      "want_logout": "هل تريد تسجيل الخروج؟",
+      "not_logged_in": "لم تقم بتسجيل الدخول",
+      "login_again": "يرجى تسجيل الدخول مرة أخرى",
+      "login_first_to_continue": "قم بتسجيل الدخول للمتابعة",
+      "login_to_get_more_features_and_more": "قم بتسجيل الدخول لمواصلة رحلتك مع عقاريون",
+      "registered_successfully": "تم التسجيل بنجاح",
+      "you_can_login_now": "يمكنك الآن تسجيل الدخول",
+      "reset_password_successfully": "تم تغيير كلمة السر بنجاح",
+      "you_can_login_with_new_password": "يمكنك الآن تسجيل الدخول باستخدام كلمة السر الجديدة",
+      "enter_email_to_reset_password": "اكتب البريد الإلكتروني لاستعادة كلمة السر",
+      "enter_forget_password_code": "يرجى إدخال الكود الذي تم إرساله إلى بريدك الإلكتروني"
+    },
+    "prompt": {
+      "already_have_account": "لديك حساب بالفعل؟",
+      "not_have_account": "ليس لديك حساب؟",
+      "forgot_password": "نسيت كلمة السر؟",
+      "i_agree_to": "أوافق على"
+    },
+    "validation": {
+      "invalid_email": "البريد الإلكتروني غير صالح!",
+      "passwords_not_match": "كلمات السر غير متطابقة",
+      "password_is_short": "كلمة السر قصيرة للغاية",
+      "invalid_phone_number": "رقم الهاتف غير صالح",
+      "password_short_length_param": "كلمة المرور يجب أن تكون {} حرفًا على الأقل.",
+      "please_complete_sign_up_fields": "يرجى استكمال حقول التسجيل",
+      "invalid_credentials": "البريد الإلكتروني أو كلمة السر غير صالحة",
+      "please_select_birth_date": "يرجى اختيار تاريخ الميلاد",
+      "please_select_gender": "يرجى اختيار الجنس",
+      "invalid_name": "الاسم غير صالح، يرجى كتابة الاسم بشكل صحيح"
+    },
+    "action": {
+      "login_now": "سجّل الآن",
+      "sign_in_to_account": "تسجيل الدخول إلى الحساب",
+      "reset_password": "استعادة كلمة السر"
+    },
+    "otp": {
+      "select_otp_method":"إختر طريقة إستلام رمز التحقق",
+      "email":"الإميل",
+      "label":"تفعيل رمز التحقق",
+      "enter_verification_code": "أدخل رمز التحقق",
+      "we_have_sent_code_to_phone_number": "تم بنجاح! \n تم إرسال رسالة استعادة كلمة المرور إلى رقم واتساب. \nيرجى التحقق من رسائل واتساب ، قد تستغرق الرسالة بضع لحظات للوصول",
+      "we_have_sent_code_to_email":"تم بنجاح! \n لقد أرسلنا رسالة استعادة كلمة المرور إلى بريدك الإلكتروني ‎يرجى التحقق من صندوق الوارد أو مجلد الرسائل غير المرغوب فيها (Spam).",
+      "did_not_receive_code": "لم تتلقى الرمز؟",
+      "code": "الكود",
+      "otp_code_resent_check": "تم إعادة إرسال رمز OTP، يرجى التحقق",
+      "wrong_otp": "لقد أدخلت رمز OTP خاطئًا. أعد إدخال الرمز أو اطلب رمز OTP جديدًا.",
+      "sending_code": "جاري إرسال الرمز",
+      "code_resent": "تم إعادة إرسال الرمز",
+      "resend_again": "إعادة الإرسال مرة أخرى",
+      "resend_again_after": "إعادة الإرسال بعد",
+      "verify": "تحقق",
+      "registered_successfully_dialog_title":"تهانينا",
+      "registered_successfully_dialog_body":"لقد تم التسجيل بنجاح",
+      "navigate_to_complete_profile_button":"أكمل ملفك الشخصي"
+
+    },
+    "delete_account_flow": {
+      "want_delete_account": "متأكد أنك تريد حذف حسابك؟\nلا يمكن التراجع عن هذه الخطوة.",
+      "accept_terms_to_delete_account": "يرجى قبول الشروط لحذف الحساب"
+    },
+        "forget_password":{
+      "title":"نسيت كلمة السر?",
+      "label_email":"دخل بريدك الإلكتروني لتصلك رسالة استعادة كلمة المرور.\nتنبيه: قد تصلك الرسالة في مجلد الرسائل غير المرغوب فيها (Spam)، يُرجى التحقق منه إذا لم تجدها في البريد الوارد.",
+      "label_phone" :"أدخل رقم هاتفك لتصلك رسالة على واتساب لاستعادة كلمة المرور.",
+      "recover_password":"إستعادة كلمة السر",
+      "remember_your_password": "تذكر كلمة المرور الخاصة بك ?"
+    }
+
+  },
+  "core": {
+    "password": "كلمة المرور",
+    "email": "البريد الإلكتروني",
+    "signup": "تسجيل جديد",
+    "sign_in": "تسجيل الدخول"
+  }
+
+}

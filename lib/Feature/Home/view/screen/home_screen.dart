@@ -1,21 +1,20 @@
-import 'package:desktop_app/Feature/Auth/SignUp/view/screen/sign_up_screen.dart';
+import 'package:desktop_app/Feature/Auth/SignIn/view/screen/login_screen.dart';
 import 'package:desktop_app/core/helper/constans.dart';
-import 'package:desktop_app/core/helper/navigation/navigation.dart';
-import 'package:desktop_app/core/helper/token_encryptor.dart';
-import 'package:desktop_app/core/helper/shared_pref.dart';
+import 'package:desktop_app/core/network/local_database/helper/hive_helper.dart';
+import 'package:desktop_app/core/utils/helper/cache_helper.dart';
 import 'package:desktop_app/core/widgets/custom_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:webview_windows/webview_windows.dart';
 import '../../../../core/utils/app_colors.dart';
 
-class WebViewPage extends StatefulWidget {
-  const WebViewPage({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
   @override
-  State<WebViewPage> createState() => _WebViewPageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _WebViewPageState extends State<WebViewPage> {
+class _HomeScreenState extends State<HomeScreen> {
   late final webviewController = WebviewController();
 
   bool isInitialized = false;
@@ -27,10 +26,10 @@ class _WebViewPageState extends State<WebViewPage> {
   }
 
   Future<void> initWebView() async {
-    final encryptedToken = AppSharedPrefs.getString(ShardPrefKeys.userToken);
-    final decryptedToken = TokenEncryptor.decryptToken(encryptedToken ?? '');
-    await AppSharedPrefs.setBool(ShardPrefKeys.isSignedIn, true);
-    final url = "https://easyta3lim.com/home?auth_token=$decryptedToken";
+    final userToken = await CacheHelper.getSecuredString(
+      ShardPrefKeys.userToken,
+    );
+    final url = "https://easyta3lim.com/home?auth_token=$userToken";
     await webviewController.initialize();
     await webviewController.loadUrl(url);
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -47,23 +46,18 @@ class _WebViewPageState extends State<WebViewPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        actions: [
-          IconButton(
-            onPressed: () async {
-              await AppSharedPrefs.clear();
-              
-              pushReplacement(context, SignUpScreen());
-            },
-            icon: Icon(Icons.logout, color: Colors.black),
-          ),
-          Spacer(flex: 1),
-          IconButton(
-            onPressed: () async {
-              await windowManager.destroy();
-            },
-            icon: Icon(Icons.close, color: Colors.black),
-          ),
-        ],
+        leading: IconButton(
+          onPressed: () async {
+            await CacheHelper.clearAllData();
+            await HiveHelper.deleteUserData();
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => LoginScreen()),
+              (route) => false,
+            );
+          },
+          icon: Icon(Icons.logout, color: AppColors.mainColor),
+        ),
       ),
       body: isInitialized
           ? Webview(webviewController)

@@ -1,86 +1,124 @@
+import 'package:desktop_app/core/helper/spacing.dart';
 import 'package:desktop_app/core/utils/app_colors.dart';
+import 'package:desktop_app/core/utils/app_text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatefulWidget {
+  final EdgeInsetsGeometry? contentPadding;
+  final Icon? icon;
+  final InputBorder? focusedBorder;
+  final InputBorder? enabledBorder;
+  final TextStyle? inputTextStyle;
+  final TextStyle? hintStyle;
+  final String hintText;
+  final bool? isObscureText;
+  final Widget? suffixIcon;
+  final Color? backgroundColor;
+  final TextEditingController? controller;
+  final String? Function(String?) validator;
+  final bool? isPhoneNumber;
+  final Widget? prefixIcon;
+  final int? maxLines;
+  final Color? fillColor;
+  final TextInputType? keyboardType;
+  final Function(String)? onChang;
+  final bool? isFilledColor;
+  final Color? filledColor;
+  final InputBorder? border;
+
   const CustomTextFormField({
     super.key,
-    this.hintText,
+    this.contentPadding,
+    required this.icon,
+    this.focusedBorder,
+    this.enabledBorder,
+    this.inputTextStyle,
+    this.hintStyle,
+    required this.hintText,
+    this.isObscureText,
     this.suffixIcon,
-    this.kebordType,
+    this.backgroundColor,
     this.controller,
-    this.validator,
-    this.textCapitalization,
-    this.obscureText = false,
-    this.textAlig = TextAlign.left,
-    this.title,
-    this.onChanged,
-    this.autovalidateMode,
-    this.color,
-    this.inputFormatters,
+    required this.validator,
+    this.isPhoneNumber,
     this.prefixIcon,
-    this.readOnly,  this.errorText,
+    this.maxLines,
+    this.fillColor,
+    this.keyboardType,
+    this.onChang,
+    this.isFilledColor,
+    this.filledColor,
+    this.border,
   });
-  final String? hintText;
-  final IconData? prefixIcon;
-  final Widget? suffixIcon;
-  final TextInputType? kebordType;
-  final TextEditingController? controller;
-  final FormFieldValidator<String>? validator;
-  final TextCapitalization? textCapitalization;
-  final bool obscureText;
-  final TextAlign textAlig;
-  final Widget? title;
-  final void Function(String)? onChanged;
-  final AutovalidateMode? autovalidateMode;
-  final List<TextInputFormatter>? inputFormatters;
-  final Color? color;
-  final bool? readOnly;
-  final String? errorText;
+
+  @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  late bool _obscureText;
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.isObscureText ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15),
-      child: TextFormField(
-        autovalidateMode: autovalidateMode,
-        onChanged: onChanged,
-        textCapitalization: textCapitalization ?? TextCapitalization.none,
-        validator:
-            validator ??
-            (value) {
-              if (value!.isEmpty) {
-                return 'This field is required';
-              }
-              return null;
-            },
-
-        readOnly: readOnly ?? false,
-        inputFormatters: inputFormatters,
-        textAlign: textAlig,
-        keyboardType: kebordType,
-        textInputAction: TextInputAction.next,
-        controller: controller,
-        obscureText: obscureText,
-        decoration: InputDecoration(
-          fillColor: AppColors.grey,
-          filled: true,
-          errorText: errorText,
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.transparent),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: Row(
+        children: [
+          widget.icon!,
+          horizontalSpace(20),
+          Expanded(
+            child: TextFormField(
+              onChanged: (value) {
+                widget.onChang?.call(value);
+              },
+              keyboardType: widget.keyboardType,
+              controller: widget.controller,
+              decoration: InputDecoration(
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(width: .3, color: AppColors.black),
+                ),
+                isDense: true,
+                contentPadding:
+                    widget.contentPadding ??
+                    EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                hintStyle:
+                    widget.hintStyle ??
+                    AppTextStyle.fontWeightw500Size16Colorblack,
+                hintText: widget.hintText,
+                suffixIcon: widget.isObscureText == true
+                    ? GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                        child: Icon(
+                          _obscureText
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                        ),
+                      )
+                    : widget.suffixIcon,
+                fillColor: widget.fillColor,
+                filled: widget.isFilledColor,
+                prefixIcon: widget.prefixIcon,
+                errorStyle: const TextStyle(height: 0),
+              ),
+              obscureText: _obscureText,
+              validator: (value) {
+                final result = widget.validator(value);
+                return result;
+              },
+              maxLines: widget.maxLines ?? 1,
+            ),
           ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.transparent),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          enabled: true,
-          label: title,
-          hintText: hintText,
-
-          prefixIcon: Icon(prefixIcon),
-          suffixIcon: suffixIcon,
-          border: OutlineInputBorder(borderRadius: BorderRadius.zero),
-        ),
+        ],
       ),
     );
   }

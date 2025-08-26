@@ -15,7 +15,7 @@ class DontHaveAnAccountSignUp extends StatelessWidget {
           TextSpan(
             text: "Sign Up",
             recognizer: TapGestureRecognizer()
-              ..onTap = () => pushReplacement(context, SignUpScreen()),
+              // ..onTap = () => pushReplacement(context, SignUpScreen()),
           ),
         ],
       ),

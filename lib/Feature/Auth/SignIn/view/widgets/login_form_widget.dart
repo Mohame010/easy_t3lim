@@ -3,7 +3,7 @@ import 'package:desktop_app/Feature/Auth/SignIn/view/widgets/dont_have_an_accoun
 import 'package:desktop_app/core/helper/spacing.dart';
 import 'package:desktop_app/core/service/windows_kayboard_blocker.dart';
 import 'package:desktop_app/core/utils/app_text_style.dart';
-import 'package:desktop_app/core/widgets/align_left_text.dart';
+import 'package:desktop_app/core/utils/validation/app_validation.dart';
 import 'package:desktop_app/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,60 +18,42 @@ class LoginFormWidget extends StatefulWidget {
 }
 
 class _LoginFormWidgetState extends State<LoginFormWidget> {
-  late bool obscure = true;
-  void obsecureState() {
-    setState(() {
-      obscure = !obscure;
-    });
-  }
-
-  IconData checkIconPassword() {
-    return obscure == true ? Icons.visibility_off : Icons.visibility;
-  }
-
   @override
   Widget build(BuildContext context) {
-    LoginCubit logInCubit = context.read<LoginCubit>();
+    final cubit = context.read<LoginCubit>();
     return Form(
-      key: logInCubit.logInFormKey,
+      key: cubit.formKey,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(
           children: [
             verticalSpace(100),
 
-            IconButton(onPressed: () async{
-              await KeyboardBlocker.stop();
-
-
-            }, icon: Icon(Icons.exit_to_app),),
-            Text(
-              'Log In',
-              style: AppTextStyle.fontWeightw500Size16Colorblack(),
+            IconButton(
+              onPressed: () async {
+                await KeyboardBlocker.stop();
+              },
+              icon: Icon(Icons.exit_to_app),
             ),
+            Text('Log In', style: AppTextStyle.fontWeightw500Size16Colorblack),
             verticalSpace(50),
-            AlignLeftText(text: 'Email'),
             CustomTextFormField(
+              icon: Icon(Icons.email_outlined),
               hintText: 'Email',
-              prefixIcon: Icons.email_outlined,
-              controller: logInCubit.emailController,
+              controller: context.read<LoginCubit>().emailController,
+              validator: AppValidation.emailValidation,
             ),
             verticalSpace(10),
-            AlignLeftText(text: 'Password'),
             CustomTextFormField(
-              obscureText: obscure,
+              icon: Icon(Icons.lock_outline_sharp),
+
+              isObscureText: true,
               hintText: 'password',
-              controller: logInCubit.passwordController,
-              prefixIcon: Icons.lock_outlined,
-              suffixIcon: IconButton(
-                onPressed: () {
-                  obsecureState();
-                },
-                icon: Icon(checkIconPassword()),
-              ),
+              controller: context.read<LoginCubit>().passwordController,
+              validator: AppValidation.passwordValidation,
             ),
             ForgetPasswordWidget(),
-            LoginButtonStateWidget(logInCubit: logInCubit),
+            LoginButtonStateWidget(logInCubit: cubit),
             verticalSpace(40),
             DontHaveAnAccountSignUp(),
           ],

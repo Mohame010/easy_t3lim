@@ -1,13 +1,5 @@
-import 'dart:io';
 
 import 'package:desktop_app/Feature/Auth/SignIn/view/screen/login_screen.dart';
-import 'package:desktop_app/Feature/Home/view/widget/show_privacy_dialog.dart';
-import 'package:desktop_app/Feature/Home/view/widget/show_privacy_mac_os_and_linux.dart';
-import 'package:desktop_app/core/function/check_user.dart';
-import 'package:desktop_app/core/function/is_running_as_admin.dart';
-import 'package:desktop_app/core/function/relaunch_as_admin.dart';
-import 'package:desktop_app/core/service/screen_record_blocker.dart';
-import 'package:desktop_app/main.dart';
 import 'package:flutter/material.dart';
 
 class OverlayWrapper extends StatefulWidget {
