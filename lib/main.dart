@@ -9,9 +9,7 @@ import 'package:desktop_app/core/service/windows_kayboard_blocker.dart';
 import 'package:desktop_app/core/utils/extensions/string_extensions.dart';
 import 'package:desktop_app/core/utils/helper/cache_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
-import 'Feature/Home/view/screen/overlay_wrapper.dart';
 import 'core/service/service_locator.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

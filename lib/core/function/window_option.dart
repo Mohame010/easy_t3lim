@@ -8,10 +8,11 @@ class WindowOptionFunction {
       center: true,
       titleBarStyle: TitleBarStyle.hidden,
       title: 'Easy t3lim App',
+      fullScreen: true,
     );
     windowManager.waitUntilReadyToShow(windowOptions, () async {
       await windowManager.setPreventClose(true);
-      // await windowManager.setFullScreen(true);
+      await windowManager.setFullScreen(true);
       await windowManager.show();
       await windowManager.focus();
     });
