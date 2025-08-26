@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:desktop_app/Feature/Auth/SignIn/data/model/login_request_body.dart';
 import 'package:desktop_app/Feature/Auth/SignIn/data/repos/login_repo.dart';
 import 'package:desktop_app/Feature/Auth/SignIn/logic/login_result.dart';
 import 'package:desktop_app/Feature/Auth/SignIn/logic/login_state.dart';
+import 'package:desktop_app/Feature/Auth/SignUp/data/models/get_device_udid.dart';
 import 'package:desktop_app/core/helper/constans.dart';
 import 'package:desktop_app/core/network/dio_factory.dart';
 import 'package:desktop_app/core/network/local_database/helper/hive_helper.dart';
@@ -20,10 +22,13 @@ class LoginCubit extends Cubit<LoginState> {
   void emitLoginStates() async {
     if (formKey.currentState!.validate()) {
       emit(const LoginState.loading());
-
+      final deviceId = await getDeviceUDID();
       final response = await _loginRepo.login(
-        email: emailController.text,
-        password: passwordController.text,
+        userModel: LoginRequestBody(
+          email: emailController.text,
+          password: passwordController.text,
+          deviceid: deviceId.replaceAll("{", '').replaceAll("}", ''),
+        ),
       );
 
       response.when(

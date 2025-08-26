@@ -24,7 +24,6 @@ class SignUpRepo {
 
       if (response.statusCode == 200) {
         final data = response.data as Map<String, dynamic>;
-        log("data${data}");
         switch (data['validity']) {
           case true:
             return SignupResult.success(
@@ -46,10 +45,8 @@ class SignUpRepo {
         );
       }
     } on DioException catch (e) {
-      // هنا هتهندل timeout, network error, unauthorized ... إلخ
       return SignupResult.serverError(errorModel: ApiErrorHandler.handle(e));
     } catch (e) {
-      // أي exception تاني غير Dio
       return SignupResult.serverError(
         errorModel: ApiErrorHandler.handle(e.toString()),
       );

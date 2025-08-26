@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:desktop_app/Feature/Auth/SignIn/view/screen/login_screen.dart';
 import 'package:desktop_app/Feature/Home/view/screen/home_screen.dart';
 import 'package:desktop_app/core/function/window_option.dart';
@@ -26,7 +28,7 @@ void main() async {
 
   await HiveHelper.initHive();
   setupGetIt();
-
+  await checkIfLoggedInUser();
   runApp(const MyApp());
 }
 
@@ -46,9 +48,10 @@ checkIfLoggedInUser() async {
   String? userToken = await CacheHelper.getSecuredString(
     ShardPrefKeys.userToken,
   );
-  if (!userToken.isNullOrEmpty()) {
-    isLoggedInUser = true;
-  } else {
+
+  if (userToken.isNullOrEmpty()) {
     isLoggedInUser = false;
+  } else {
+    isLoggedInUser = true;
   }
 }

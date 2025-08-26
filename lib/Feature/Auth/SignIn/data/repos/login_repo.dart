@@ -5,23 +5,21 @@ import 'package:desktop_app/Feature/Auth/SignIn/data/model/login_request_body.da
 import 'package:desktop_app/Feature/Auth/SignIn/data/model/login_response_model.dart';
 import 'package:desktop_app/Feature/Auth/SignIn/logic/login_result.dart';
 import 'package:desktop_app/core/helper/constans.dart';
-import 'package:desktop_app/core/network/api_constans.dart';
 import 'package:desktop_app/core/network/api_error_handler.dart';
-import 'package:desktop_app/core/network/api_result.dart';
 import 'package:dio/dio.dart';
 
 class LoginRepo {
   final Dio dio;
   LoginRepo(this.dio);
-  
+
   Future<LoginResult> login({
-    required String email,
-    required String password,
+    required LoginRequestBody userModel,
   }) async {
     try {
       var response = await dio.request(
-        '${ApiConstans.baseUrl}login?email=$email&password=$password',
-        options: Options(method: 'GET'),
+        '${ApiConstans.baseUrl}login',
+        options: Options(method: 'POST'),
+        data: FormData.fromMap(userModel.toJson()),
       );
 
       if (response.statusCode == 200) {
@@ -50,10 +48,8 @@ class LoginRepo {
         );
       }
     } on DioException catch (e) {
-      // هنا هتهندل timeout, network error, unauthorized ... إلخ
       return LoginResult.serverError(errorModel: ApiErrorHandler.handle(e));
     } catch (e) {
-      // أي exception تاني غير Dio
       return LoginResult.serverError(
         errorModel: ApiErrorHandler.handle(e.toString()),
       );
