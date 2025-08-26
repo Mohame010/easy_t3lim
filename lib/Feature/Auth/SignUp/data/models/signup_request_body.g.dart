@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sign_up_request_body.dart';
+part of 'signup_request_body.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SignUpRequestBody _$SignUpRequestBodyFromJson(Map<String, dynamic> json) =>
-    SignUpRequestBody(
+SignupRequestBody _$SignupRequestBodyFromJson(Map<String, dynamic> json) =>
+    SignupRequestBody(
       email: json['email'] as String,
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String,
@@ -16,7 +16,7 @@ SignUpRequestBody _$SignUpRequestBodyFromJson(Map<String, dynamic> json) =>
       udid: json['udid'] as String,
     );
 
-Map<String, dynamic> _$SignUpRequestBodyToJson(SignUpRequestBody instance) =>
+Map<String, dynamic> _$SignupRequestBodyToJson(SignupRequestBody instance) =>
     <String, dynamic>{
       'first_name': instance.firstName,
       'last_name': instance.lastName,

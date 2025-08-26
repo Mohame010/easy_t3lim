@@ -46,4 +46,16 @@ abstract class AppValidation {
     }
     return null;
   }
+
+  static String? confirmPasswordValidation(
+    String? confirmPassword,
+    String? originalPassword,
+  ) {
+    if (confirmPassword == null || confirmPassword.trim().isEmpty) {
+      return "تأكيد كلمة المرور مطلوب";
+    } else if (confirmPassword != originalPassword) {
+      return "كلمتا المرور غير متطابقتين";
+    }
+    return null;
+  }
 }

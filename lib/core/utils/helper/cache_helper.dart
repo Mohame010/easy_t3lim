@@ -1,3 +1,4 @@
+import 'package:desktop_app/core/helper/constans.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -16,7 +17,9 @@ class CacheHelper {
   }
 
   static Future<bool> clearAllData() async {
-    return await _sharedPreferences.clear();
+    await _sharedPreferences.clear();
+    await clearSecured(ShardPrefKeys.userToken);
+    return true;
   }
 
   /// Saves a [value] with a [key] in the SharedPreferences.

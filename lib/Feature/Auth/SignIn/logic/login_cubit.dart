@@ -18,34 +18,36 @@ class LoginCubit extends Cubit<LoginState> {
   final formKey = GlobalKey<FormState>();
 
   void emitLoginStates() async {
-    emit(const LoginState.loading());
+    if (formKey.currentState!.validate()) {
+      emit(const LoginState.loading());
 
-    final response = await _loginRepo.login(
-      email: emailController.text,
-      password: passwordController.text,
-    );
+      final response = await _loginRepo.login(
+        email: emailController.text,
+        password: passwordController.text,
+      );
 
-    response.when(
-      success: (userModel) async {
-        await saveUserToken(userModel.token);
+      response.when(
+        success: (userModel) async {
+          await saveUserToken(userModel.token);
 
-        await HiveHelper.saveUserData(
-          userData: CachedUserModel(
-            userId: userModel.userId,
-            firstName: userModel.firstName,
-            lastName: userModel.lastName,
-            email: userModel.email,
-          ),
-        );
-        emit(LoginState.success());
-      },
-      error: (error) {
-        emit(LoginState.error(error: error.deviceVerification),);
-      },
-      serverError: (error) {
-        emit(LoginState.error(error: error.message),);
-      },
-    );
+          await HiveHelper.saveUserData(
+            userData: CachedUserModel(
+              userId: userModel.userId,
+              firstName: userModel.firstName,
+              lastName: userModel.lastName,
+              email: userModel.email,
+            ),
+          );
+          emit(LoginState.success());
+        },
+        error: (error) {
+          emit(LoginState.error(error: error.deviceVerification));
+        },
+        serverError: (error) {
+          emit(LoginState.error(error: error.message));
+        },
+      );
+    }
   }
 
   Future<void> saveUserToken(String token) async {

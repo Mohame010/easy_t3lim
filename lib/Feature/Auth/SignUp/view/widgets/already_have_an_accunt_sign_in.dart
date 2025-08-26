@@ -1,5 +1,7 @@
 import 'package:desktop_app/Feature/Auth/SignIn/view/screen/login_screen.dart';
 import 'package:desktop_app/core/helper/navigation/navigation.dart';
+import 'package:desktop_app/core/utils/app_text_style.dart';
+import 'package:desktop_app/core/utils/resource/app_colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +15,10 @@ class AlreadyHaveAnAccuntSignInText extends StatelessWidget {
         text: "Already have an account ? ",
         children: [
           TextSpan(
-            text: "Sign In",
+            text: "Login",
+            style: AppTextStyle.fontWeightBoldFontSize14Greay.copyWith(
+              color: AppColors.blueColor,
+            ),
             recognizer: TapGestureRecognizer()
               ..onTap = () => pushReplacement(context, LoginScreen()),
           ),

@@ -1,31 +1,58 @@
-// import 'dart:developer';
+import 'dart:developer';
 
-// import 'package:desktop_app/Feature/Auth/SignUp/data/models/sign_up_request_body.dart';
-// import 'package:desktop_app/Feature/Auth/SignUp/data/models/sign_up_response_model.dart';
+import 'package:desktop_app/Feature/Auth/SignUp/data/models/signup_error_response_model.dart';
+import 'package:desktop_app/Feature/Auth/SignUp/data/models/signup_request_body.dart';
+import 'package:desktop_app/Feature/Auth/SignUp/data/models/signup_response_model.dart';
+import 'package:desktop_app/Feature/Auth/SignUp/data/models/signup_result.dart';
+import 'package:desktop_app/core/helper/constans.dart';
+import 'package:desktop_app/core/network/api_error_handler.dart';
+import 'package:dio/dio.dart';
 
-// import '../../../../../core/network/api_result.dart';
-// import '../../../../../core/network/api_service.dart';
+class SignUpRepo {
+  final Dio dio;
+  SignUpRepo(this.dio);
 
-// class SignUpRepo {
-//   final ApiService apiService;
+  Future<SignupResult> singup({required SignupRequestBody userRequest}) async {
+    try {
+      final response = await dio.request(
+        "${ApiConstans.baseUrl}${ApiConstans.signUp}",
+        options: Options(method: "POST"),
+        data: FormData.fromMap(userRequest.toJson())
 
-//   SignUpRepo({required this.apiService});
-//   Future<ApiResult<SignUpResponseModel>> signUp(
-//     SignUpRequestBody signUpRequestBody,
-//   ) async {
-//     try {
-//       // final response = await apiService.signUp(
-//       //   signUpRequestBody.email,
-//       //   signUpRequestBody.firstName,
-//       //   signUpRequestBody.lastName,
-//       //   signUpRequestBody.password,
-//       //   signUpRequestBody.deviceidID,
-//       //   signUpRequestBody.udid,
-//       // );
-//       return ApiResult.success(response);
-//     } catch (e) {
-//       log(e.toString());
-//       return ApiResult.failure(e.toString());
-//     }
-//   }
-// }
+         
+      );
+
+      if (response.statusCode == 200) {
+        final data = response.data as Map<String, dynamic>;
+        log("data${data}");
+        switch (data['validity']) {
+          case true:
+            return SignupResult.success(
+              userModel: SignupSucessfullyResponseModel.fromJson(data),
+            );
+          case false:
+            return SignupResult.error(
+              errorModel: SignupErrorResponseModel.fromJson(data),
+            );
+
+          default:
+            return SignupResult.serverError(
+              errorModel: ApiErrorHandler.handle(response),
+            );
+        }
+      } else {
+        return SignupResult.serverError(
+          errorModel: ApiErrorHandler.handle(response),
+        );
+      }
+    } on DioException catch (e) {
+      // هنا هتهندل timeout, network error, unauthorized ... إلخ
+      return SignupResult.serverError(errorModel: ApiErrorHandler.handle(e));
+    } catch (e) {
+      // أي exception تاني غير Dio
+      return SignupResult.serverError(
+        errorModel: ApiErrorHandler.handle(e.toString()),
+      );
+    }
+  }
+}
