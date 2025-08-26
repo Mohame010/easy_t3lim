@@ -9,6 +9,8 @@ import 'package:desktop_app/Feature/Auth/SignUp/logic/signup_state.dart';
 import 'package:desktop_app/core/network/api_result.dart';
 import 'package:desktop_app/core/utils/helper/cache_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_udid/flutter_udid.dart';
+import 'package:uuid/uuid.dart';
 import '../../../../core/helper/constans.dart';
 
 class SignupCubit extends Cubit<SignupState> {
@@ -21,13 +23,15 @@ class SignupCubit extends Cubit<SignupState> {
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   String deviceId = '';
-  String udid = '123';
 
   final signUpFormKey = GlobalKey<FormState>();
 
   void emitSignUpState() async {
     if (signUpFormKey.currentState!.validate()) {
       emit(SignupState.loading());
+      final uuid = Uuid();
+
+      String udid = uuid.v4();
 
       log(deviceId);
       final response = await _signUpRepo.singup(

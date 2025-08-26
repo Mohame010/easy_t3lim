@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:desktop_app/Feature/Auth/SignUp/data/models/get_device_udid.dart';
 import 'package:desktop_app/Feature/Auth/SignUp/logic/signup_cubit.dart';
 import 'package:desktop_app/Feature/Auth/SignUp/view/widgets/already_have_an_accunt_sign_in.dart';
@@ -7,6 +9,7 @@ import 'package:desktop_app/core/utils/validation/app_validation.dart';
 import 'package:desktop_app/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_udid/flutter_udid.dart';
 import 'signup_button_state.dart';
 
 class SignUpFormWidget extends StatefulWidget {
@@ -30,7 +33,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
 
   @override
   void initState() {
-    getDeviceUDID().then((value) {
+    getDeviceUDID().then((value) async {
       if (!mounted) return;
       context.read<SignupCubit>().deviceId = value
           .replaceAll("{", '')
