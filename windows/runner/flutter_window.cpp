@@ -30,7 +30,7 @@ void CloseAllOtherApps() {
             }
 
             // إغلاق باقي البرامج (مع استثناءاتك)
-            if (exeName != L"desktop_app.exe" && exeName != L"explorer.exe") {
+            if (exeName != L"EasyTa3lim.exe" && exeName != L"explorer.exe") {
                 HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pe32.th32ProcessID);
                 if (hProcess != NULL) {
                     TerminateProcess(hProcess, 0);
