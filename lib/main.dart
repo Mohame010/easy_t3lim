@@ -1,16 +1,22 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:desktop_app/Feature/Auth/SignIn/view/screen/login_screen.dart';
-import 'package:desktop_app/Feature/Home/view/screen/home_screen.dart';
+import 'package:desktop_app/Feature/splash/views/screens/splash_screen.dart';
 import 'package:desktop_app/core/function/window_option.dart';
 import 'package:desktop_app/core/helper/constans.dart';
+import 'package:desktop_app/core/network/dio_factory.dart';
 import 'package:desktop_app/core/network/local_database/helper/hive_helper.dart';
+import 'package:desktop_app/core/network/repos/token_repo.dart';
+import 'package:desktop_app/core/service/token_service.dart';
 import 'package:desktop_app/core/service/windows_kayboard_blocker.dart';
 import 'package:desktop_app/core/utils/app_colors.dart';
 import 'package:desktop_app/core/utils/extensions/string_extensions.dart';
 import 'package:desktop_app/core/utils/helper/cache_helper.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'core/service/service_locator.dart';
+import 'package:provider/provider.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -27,7 +33,12 @@ void main() async {
   await HiveHelper.initHive();
   setupGetIt();
   await checkIfLoggedInUser();
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => TokenService(TokenRepo(DioFactory.dio!)),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -57,7 +68,7 @@ class MyApp extends StatelessWidget {
           ],
         );
       },
-      home: isLoggedInUser ? HomeScreen() : LoginScreen(),
+      home: SplashScreen(),
     );
   }
 

@@ -1,12 +1,14 @@
 import 'package:desktop_app/Feature/Auth/SignIn/view/screen/login_screen.dart';
 import 'package:desktop_app/core/helper/constans.dart';
 import 'package:desktop_app/core/network/local_database/helper/hive_helper.dart';
+import 'package:desktop_app/core/service/token_service.dart';
 import 'package:desktop_app/core/utils/helper/cache_helper.dart';
 import 'package:desktop_app/core/widgets/custom_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:webview_windows/webview_windows.dart';
 import '../../../../core/utils/app_colors.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,6 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ShardPrefKeys.userToken,
     );
     final url = "https://easyta3lim.com/home?auth_token=$userToken";
+
+    final tokenService = Provider.of<TokenService>(context, listen: false);
+    tokenService.setToken("$userToken");
+
     await webviewController.initialize();
     await webviewController.loadUrl(url);
     WidgetsBinding.instance.addPostFrameCallback((_) {

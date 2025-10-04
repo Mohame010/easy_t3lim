@@ -4,18 +4,17 @@ import 'package:desktop_app/Feature/Auth/SignIn/data/model/login_response_model.
 import 'package:desktop_app/Feature/Auth/SignIn/logic/login_result.dart';
 import 'package:desktop_app/core/helper/constans.dart';
 import 'package:desktop_app/core/network/api_error_handler.dart';
+import 'package:desktop_app/core/service/token_service.dart';
 import 'package:dio/dio.dart';
 
 class LoginRepo {
   final Dio dio;
   LoginRepo(this.dio);
 
-  Future<LoginResult> login({
-    required LoginRequestBody userModel,
-  }) async {
+  Future<LoginResult> login({required LoginRequestBody userModel}) async {
     try {
       var response = await dio.request(
-        '${ApiConstans.baseUrl}login',
+        '${ApiConstans.baseUrl}${ApiConstans.login}',
         options: Options(method: 'POST'),
         data: FormData.fromMap(userModel.toJson()),
       );
