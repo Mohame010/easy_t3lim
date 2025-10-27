@@ -1,0 +1,20 @@
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/easy_t3lim.jpg"
+  min_sdk_android: 21
+  adaptive_icon_foreground: "assets/icons/easy_t3lim.jpg"
+  adaptive_icon_background: "#ffffff"
+
+  web:
+    generate: true
+    image_path: "assets/icons/easy_t3lim.jpg"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/icons/easy_t3lim.jpg"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/icons/easy_t3lim.jpg"
